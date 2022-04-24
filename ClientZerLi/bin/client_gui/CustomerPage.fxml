@@ -217,7 +217,7 @@
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <children>
-                                    <Button fx:id="complaintBtn" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#complaint" prefHeight="175.0" prefWidth="198.0" styleClass="buttonMenu" stylesheets="@CustomerPageStyle.css" text="Complaint" textFill="WHITE">
+                                    <Button fx:id="complaintBtn" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#compliant" prefHeight="175.0" prefWidth="198.0" styleClass="buttonMenu" stylesheets="@CustomerPageStyle.css" text="Complaint" textFill="WHITE">
                                        <font>
                                           <Font name="Calibri Bold Italic" size="14.0" />
                                        </font>

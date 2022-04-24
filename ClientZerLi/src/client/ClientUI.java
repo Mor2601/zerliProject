@@ -14,12 +14,12 @@ public class ClientUI extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		ConnectToServerController ConnectToServer = new ConnectToServerController();
-		ConnectToServer.start(primaryStage);
+//		ConnectToServerController ConnectToServer = new ConnectToServerController();
+//		ConnectToServer.start(primaryStage);
 //		CatalogScreenController catalogScreen = new CatalogScreenController();
 //		catalogScreen.start(primaryStage);
-//		CustomerPageController customerPage = new CustomerPageController();
-//		customerPage.start(primaryStage);
+		CustomerPageController customerPage = new CustomerPageController();
+		customerPage.start(primaryStage);
 		
 	}
 }

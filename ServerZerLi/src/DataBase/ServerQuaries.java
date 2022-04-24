@@ -119,27 +119,12 @@ public class ServerQuaries {
 	public static void getUser(TransmissionPack obj, Connection con) {
 		if (obj instanceof TransmissionPack) {
 			Login user = (Login) obj.getInformation();
-			String userName = user.getUserName();
-			String password = user.getPassword();
-			Statement stmt;
+			Response response=null;
 			try {
-				stmt = con.createStatement();
-				ResultSet rs = stmt.executeQuery("SELECT userName, password FROM login;");
-				while (rs.next()) {
-					/** check if the user name or the password are incorrect */
-					if (!(rs.getString(1).equals(userName)) || !(rs.getString(2).equals(password))) {
-						obj.setResponse(Response.USER_NAME_OR_PASSWORD_INCORRECT);
-						rs.close();
-						return;
-					}
-					if (rs.getString(1).equals(userName) && rs.getString(2).equals(password)) {
-						obj.setResponse(Response.USER_EXIST);
-						rs.close();
-						return;
-					}
-				}
+				ResultSet rs = Query.getUserLoginDetailQuery(con, user);
+				response = getUserLogInResponse(user, response, rs);
 				rs.close();
-				obj.setResponse(Response.USER_NOT_EXIST);
+				obj.setResponse(response);
 				return;
 
 			} catch (SQLException e) {
@@ -150,6 +135,23 @@ public class ServerQuaries {
 
 		}
 	}
+	/**get the response of the login from the details the user where sent to the db*/
+	private static Response getUserLogInResponse(Login user, Response response, ResultSet rs) throws SQLException {
+		while (rs.next()) {
+			/** check if the user name or the password are incorrect */
+			if (!(rs.getString(1).equals(user.getUserName())) || !(rs.getString(2).equals(user.getPassword()))) {
+				response=Response.USER_NAME_OR_PASSWORD_INCORRECT;
+				
+			}
+			if (rs.getString(1).equals(user.getUserName()) && rs.getString(2).equals(user.getPassword())) {
+				response=Response.USER_EXIST;
+				
+			}
+		}
+		return response;
+	}
+
+	
 
 	public static void GetUserOrders(TransmissionPack obj, Connection con) {
 		if (!(obj instanceof TransmissionPack)) {
